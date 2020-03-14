@@ -98,8 +98,8 @@ def plot(df, yhat, title):
 
     fig = plt.figure()
     ax = fig.add_subplot(111)
-    ax.plot(df_hat.index, df_hat.yhat, '--', c='blue', ms=20, label='트렌드 예측')
-    ax.plot(df.index, df['누적 확진자수'], 'o', c='purple', ms=5, alpha=0.7, label='누적 확진자수')
+    ax.plot(df_hat.index, df_hat.yhat, '--', c='blue', ms=20, label='predicted')
+    ax.plot(df.index, df['누적 확진자수'], 'o', c='purple', ms=5, alpha=0.7, label='cumulative cases')
     ax.legend(loc='best')
 
     ax.set_xticks(df.index)
@@ -111,8 +111,8 @@ def plot(df, yhat, title):
 
     # make a twin axis
     ax2 = ax.twinx()
-    ax2.bar(df.index, df['확진자수'], color='orange', alpha=.5, label='일별 확진자수')
-    ax2.bar(df.index, df['격리해제'], color='cyan', alpha=.5, label='일별 격리해제')
+    ax2.bar(df.index, df['확진자수'], color='orange', alpha=.5, label='new cases')
+    ax2.bar(df.index, df['격리해제'], color='cyan', alpha=.5, label='released cases')
     ax2.legend(loc='center right')
     
     plt.title(title)
