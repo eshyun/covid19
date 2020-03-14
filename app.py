@@ -1,3 +1,5 @@
+import os
+import time
 import matplotlib
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -151,6 +153,14 @@ def plot(df, yhat, title):
 	plt.close()
 
 def process_data(method='plotly'):
+	if method == 'plotly':
+		file = 'covid19.html'
+	else:
+		file = 'covid19.png'
+	diff = time.time() - os.path.getmtime(file)
+	if diff < 60 * 30:  # less than 30 minutes
+		return file
+
 	df = get_data()
 	df['날짜'] = pd.to_datetime(df['날짜']).dt.date
 	df = df.drop_duplicates(subset='날짜', keep='last')
@@ -184,12 +194,11 @@ def process_data(method='plotly'):
 	yhat = inverse_transform(scaled_yhat, 1, scaler)
 	title = r"$f(x)=\frac{1}{1 + e^{%.2f(x - %.2f)}}, R^2=%.3f$" % (-estimated_k, estimated_x0, rsquared(x,y,yhat[:len(y)],scaler))
 
-	if method == 'matplotlib':
-		plot(df, yhat, title)
-		return 'covid19.png'
-	else:
+	if method == 'plotly':
 		plotly_plot(df, yhat, title)
-		return 'covid19.html'
+	else:
+		plot(df, yhat, title)
+	return file
 
 @app.route('/')
 def route_root():
@@ -199,9 +208,9 @@ def route_root():
 def route_plot():
 	q = request.args.get('q')
 	if q and q == 'png':
-		file = process_data(method='matplotlib')
+		file = process_data(method='png')
 	else:
-		file = process_data()
+		file = process_data(method='plotly')
 	return app.send_static_file(file)
 
 if __name__ == '__main__':
