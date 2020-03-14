@@ -91,23 +91,23 @@ def plotly_plot(df, yhat, title):
 	fig = make_subplots(specs=[[{"secondary_y": True}]])
 
 	fig.add_trace(
-		go.Scatter(x=df_hat.index, y=df_hat.yhat, mode='lines', name="트렌드 예측"),
-		secondary_y=False,
+	    go.Scatter(x=df_hat.index, y=df_hat.yhat, mode='lines', name="트렌드 예측"),
+	    secondary_y=False,
 	)
 
 	fig.add_trace(
-		go.Scatter(x=df_hat.index, y=df['누적 확진자수'], mode='markers', name="누적 확진자"),
-		secondary_y=False,
+	    go.Scatter(x=df_hat.index, y=df['누적 확진자수'], mode='markers', name="누적 확진자"),
+	    secondary_y=False,
 	)
 
 	fig.add_trace(
-		go.Bar(x=df.index, y=df['확진자수'], name="신규 확진자"),
-		secondary_y=True,
+	    go.Bar(x=df.index, y=df['확진자수'], name="신규 확진자", marker={'opacity': 0.6}),
+	    secondary_y=True,
 	)
 
 	fig.add_trace(
-		go.Bar(x=df.index, y=df['격리해제'], name="격리 해제"),
-		secondary_y=True,
+	    go.Bar(x=df.index, y=df['격리해제'], name="격리 해제", marker={'opacity': 0.6}),
+	    secondary_y=True,
 	)
 
 	# Add figure title
