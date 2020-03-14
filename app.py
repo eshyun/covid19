@@ -157,9 +157,10 @@ def process_data(method='plotly'):
 		file = 'covid19.html'
 	else:
 		file = 'covid19.png'
-	diff = time.time() - os.path.getmtime(file)
-	if diff < 60 * 30:  # less than 30 minutes
-		return file
+	if os.path.exists(file):
+		diff = time.time() - os.path.getmtime(file)
+		if diff < 60 * 30:  # less than 30 minutes
+			return file
 
 	df = get_data()
 	df['날짜'] = pd.to_datetime(df['날짜']).dt.date
