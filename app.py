@@ -263,7 +263,7 @@ def process_data(method='plotly'):
 	# 	if diff < 60 * 30:  # less than 30 minutes
 	# 		return file
 
-	df = get_data()
+	df = get_data(newest=False)
 
 	y = np.array(df['누적 확진자수'].values)
 	x = np.arange(1, len(y)+1)
