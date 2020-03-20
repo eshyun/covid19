@@ -17,6 +17,9 @@ sklearn = "^0.0"
 plotly = "^4.5.4"
 cufflinks = "^0.17.3"
 flask = "^1.1.1"
+selenium = "^3.141.0"
+bs4 = "^0.0.1"
+lxml = "^4.5.0"
 
 [tool.poetry.dev-dependencies]
 
