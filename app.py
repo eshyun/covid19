@@ -298,7 +298,7 @@ def route_plot():
 		return app.send_static_file(file)
 	else:
 		fig = process_data(method='plotly')
-		div = offline.plot(fig, show_link=False, output_type="div", include_plotlyjs=False)
+		div = offline.plot(fig, show_link=False, output_type="div", include_plotlyjs=True)
 		return render_template('index.html', chart=div)
 
 
