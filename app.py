@@ -279,7 +279,7 @@ def process_data(method='plotly'):
 	scaled_xhat = transform(xhat, 0, scaler)
 	scaled_yhat = sigmoid(scaled_xhat, k=estimated_k, x0=estimated_x0)  # = sigmoid(scaled_xhat, *popt)
 	yhat = inverse_transform(scaled_yhat, 1, scaler)
-	title = r"$ f(x)=\frac{1}{1 + e^{%.2f(x - %.2f)}}, R^2=%.3f $" % (-estimated_k, estimated_x0, rsquared(x,y,yhat[:len(y)],scaler))
+	title = r"Logistic $f(x)=\frac{1}{1 + e^{%.2f(x - %.2f)}}, R^2=%.3f$" % (-estimated_k, estimated_x0, rsquared(x,y,yhat[:len(y)],scaler))
 
 	if method == 'plotly':
 		return plotly_plot(df, yhat, title)
